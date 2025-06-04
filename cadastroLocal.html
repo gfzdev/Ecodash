@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECODASH - Minha Residência</title>
+    <link rel="stylesheet" href="residencias.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="residences-container">
+        <header class="residences-header">
+            <div class="logo-container">
+                <img src="logoEcodash.png" alt="ECODASH Logo" class="logo">
+                <h1>Cadastro de Residência</h1>
+            </div>
+            <div class="user-info">
+                <img src="user.jpg" alt="User" class="user-avatar">
+                <span class="user-name">Gabriel Mendes</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="residences-main">
+
+            <div class="form-container">
+                <form class="local-form">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="address">Endereço</label>
+                            <input type="text" id="address" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="number">Número</label>
+                            <input type="text" id="number" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="complement">Complemento</label>
+                            <input type="text" id="complement">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="neighborhood">Bairro</label>
+                            <input type="text" id="neighborhood" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="city">Cidade</label>
+                            <input type="text" id="city" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="state">Estado</label>
+                            <select id="state" required>
+                                <!-- Opções de estados -->
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="zipcode">CEP</label>
+                            <input type="text" id="zipcode" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="residence-type">Tipo de Residência</label>
+                            <select id="residence-type" required>
+                                <option value="">Selecione</option>
+                                <option value="house">Casa</option>
+                                <option value="apartment">Apartamento</option>
+                                <option value="condo">Condomínio</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="area">Área Construída (m²)</label>
+                            <input type="number" id="area" min="1" required>
+                        </div>                
+
+                        <div class="input-group">
+                            <label for="moradores">Número de Moradores:</label>
+                            <input type="number" id="moradores" min="1" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group compact-upload-container">
+                          <label>Foto da Residência</label>
+                          <div class="compact-uploader">
+                            <input type="file" id="residencePhoto" accept="image/*" class="hidden-upload">
+                            
+                            <div class="compact-upload-card">
+                              <div class="compact-preview" id="compactImagePreview">
+                                <div class="compact-empty-state">
+                                  <i class="fas fa-home"></i>
+                                </div>
+                                <img class="compact-preview-image" src="" alt="Preview">
+                              </div>
+                              
+                              <div class="compact-upload-info">
+                                <div class="compact-file-info">
+                                  <span class="compact-file-name">Nenhuma imagem selecionada</span>
+                                  <span class="compact-file-size">Formatos: JPG, PNG (Max. 5MB)</span>
+                                </div>
+                                
+                                <div class="compact-upload-buttons">
+                                  <label for="residencePhoto" class="compact-upload-btn">
+                                    <i class="fas fa-folder-open"></i> Selecionar
+                                  </label>
+                                  <button type="button" class="compact-remove-btn" id="compactRemoveBtn">
+                                    <i class="fas fa-times"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-secondary">Salvar</button>
+                        <button type="button" class="btn-primary">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>
+ document.addEventListener('DOMContentLoaded', function() {
+  const fileInput = document.getElementById('residencePhoto');
+  const previewArea = document.getElementById('compactImagePreview');
+  const previewImage = previewArea.querySelector('.compact-preview-image');
+  const emptyState = previewArea.querySelector('.compact-empty-state');
+  const fileName = document.querySelector('.compact-file-name');
+  const removeBtn = document.getElementById('compactRemoveBtn');
+  const uploadCard = document.querySelector('.compact-upload-card');
+
+  // Quando um arquivo é selecionado
+  fileInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      // Validação do arquivo
+      if (!file.type.match('image.*')) {
+        alert('Por favor, selecione uma imagem (JPG, PNG)');
+        return;
+      }
+      
+      if (file.size > 5 * 1024 * 1024) {
+        alert('A imagem deve ter no máximo 5MB');
+        return;
+      }
+      
+      // Cria preview da imagem
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        previewImage.src = event.target.result;
+        previewArea.classList.add('compact-has-image');
+        fileName.textContent = file.name;
+        removeBtn.style.display = 'flex';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Remove a imagem
+  removeBtn.addEventListener('click', function() {
+    fileInput.value = '';
+    previewImage.src = '';
+    previewArea.classList.remove('compact-has-image');
+    fileName.textContent = 'Nenhuma imagem selecionada';
+    this.style.display = 'none';
+  });
+
+  // Drag and drop
+  uploadCard.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    uploadCard.classList.add('compact-drag-over');
+  });
+
+  ['dragleave', 'dragend'].forEach(type => {
+    uploadCard.addEventListener(type, function() {
+      uploadCard.classList.remove('compact-drag-over');
+    });
+  });
+
+  uploadCard.addEventListener('drop', function(e) {
+    e.preventDefault();
+    uploadCard.classList.remove('compact-drag-over');
+    
+    if (e.dataTransfer.files.length) {
+      fileInput.files = e.dataTransfer.files;
+      const event = new Event('change');
+      fileInput.dispatchEvent(event);
+    }
+  });
+
+  // Clique na área de preview
+  previewArea.addEventListener('click', function(e) {
+    if (e.target === previewArea || e.target === emptyState) {
+      fileInput.click();
+    }
+  });
+});
+    </script>
+    
+</body>
+</html>

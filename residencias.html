@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Residências - ECODASH</title>
+    <link rel="stylesheet" href="residencias.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="residences-container">
+        <!-- Header -->
+        <header class="residences-header">
+            <div class="logo-container">
+                <img src="logoEcodash.png" alt="ECODASH Logo" class="logo">
+                <h1>Minhas Residências</h1>
+            </div>
+            <div class="user-info">
+                <img src="user.jpg" alt="User" class="user-avatar">
+                <span class="user-name">Gabriel Mendes</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="residences-main">
+            
+
+            <div class="residences-grid">
+                <!-- Residência 1 -->
+                <div class="residence-card">
+                    <div class="residence-image" style="background-image: url('Casa-na-praia.png');">
+                    </div>
+                    <div class="residence-info">
+                        <h2>Casa da Praia</h2>
+                        <div class="residence-details">
+                            <p><i class="fas fa-map-marker-alt"></i> Av. Beira Mar, 123 - Praia do Canto</p>
+                            <p><i class="fas fa-users"></i> 4 moradores</p>
+                            <p><i class="fas fa-bolt"></i> 325 kWh/mês</p>
+                        </div>
+                    </div>
+                    <div class="residence-actions">
+                        <a href="dashboard.html" class="btn-enter">
+                            <i class="fas fa-home"></i> Acessar
+                        </a>
+                        <button class="btn-edit">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Residência 2 -->
+                <div class="residence-card">
+                    <div class="residence-image" style="background-image: url('Residencial\ Sol.jpg');">
+                    </div>
+                    <div class="residence-info">
+                        <h2>Residencial Sol</h2>
+                        <div class="residence-details">
+                            <p><i class="fas fa-map-marker-alt"></i> R. Palmeiras, 456 - Jardim Camburi</p>
+                            <p><i class="fas fa-users"></i> 2 moradores</p>
+                            <p><i class="fas fa-bolt"></i> 210 kWh/mês</p>
+                        </div>
+                    </div>
+                    <div class="residence-actions">
+                        <a href="dashboard.html" class="btn-enter">
+                            <i class="fas fa-home"></i> Acessar
+                        </a>
+                        <button class="btn-edit">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Residência 3 -->
+                <div class="residence-card">
+                    <div class="residence-image" style="background-image: url('Genérico.jpg');">
+                    </div>
+                    <div class="residence-info">
+                        <h2>Chácara Verde</h2>
+                        <div class="residence-details">
+                            <p><i class="fas fa-map-marker-alt"></i> Est. Rural, 789 - São Pedro</p>
+                            <p><i class="fas fa-users"></i> Sem moradores</p>
+                            <p><i class="fas fa-bolt"></i> Monitoramento pausado</p>
+                        </div>
+                    </div>
+                    <div class="residence-actions">
+                        <a href="dashboard.html" class="btn-enter">
+                            <i class="fas fa-home"></i> Acessar
+                        </a>
+                        <button class="btn-edit">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card para nova residência -->
+                <div class="new-residence-card">
+                    <div class="add-icon">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <h2>Adicionar Residência</h2>
+                    <p>Cadastre uma nova residência para começar o monitoramento</p>
+                    <a href="cadastroLocal.html" class="btn-add">
+                        <i class="fas fa-home"></i> Nova Residência
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="residences-footer">
+            <p>© 2025 ECODASH</p>
+            <div class="footer-links">
+                <a href="#">Github</a>
+                <a href="#">De</a>
+                <a href="#">Todos</a>
+            </div>
+        </footer>
+    </div>
+    <!-- Modal de Edição -->
+<div class="expanded-modal" id="editResidenceModal">
+    <div class="modal-content">
+        <button class="close-modal">&times;</button>
+        <h2><i class="fas fa-home"></i> Editar Residência</h2>
+        
+        <form class="edit-form">
+            <div class="form-grid">
+                <!-- Coluna 1 -->
+                <div class="form-column">
+                    <div class="form-group">
+                        <label for="residence-name">Nome da Residência</label>
+                        <input type="text" id="residence-name" value="Casa da Praia" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="residence-image">Imagem da Residência</label>
+                        <div class="image-upload">
+                            <img src="Casa-na-praia.png" id="image-preview" class="image-preview">
+                            <input type="file" id="residence-image" accept="image/*" class="file-input">
+                            <label for="residence-image" class="upload-btn">
+                                <i class="fas fa-camera"></i> Alterar Imagem
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="residence-members">Número de Moradores</label>
+                        <input type="number" id="residence-members" min="1" value="4" required>
+                    </div>
+                </div>
+                
+                <!-- Coluna 2 -->
+                <div class="form-column">
+                    <div class="form-group">
+                        <label for="residence-address">Endereço</label>
+                        <input type="text" id="residence-address" value="Av. Beira Mar, 123" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="residence-neighborhood">Bairro</label>
+                        <input type="text" id="residence-neighborhood" value="Praia do Canto" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="residence-city">Cidade</label>
+                        <input type="text" id="residence-city" value="Vitória" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" class="btn-cancel">Cancelar</button>
+                <button type="submit" class="btn-submit">Salvar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="residencia.js"></script>
+</body>
+</html>
