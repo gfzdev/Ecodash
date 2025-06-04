@@ -158,17 +158,3 @@ document.getElementById('newRecordModal').addEventListener('click', function(e) 
         closeModal();
     }
 });
-
-// Form Submission
-document.querySelector('.record-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Aqui você pode adicionar a lógica para salvar o registro
-    alert('Registro salvo com sucesso!');
-    closeModal();
-    
-    // Atualizar o dashboard (simulação)
-    setTimeout(() => {
-        alert('Dashboard atualizado com os novos dados!');
-    }, 500);
-});
